@@ -1,1 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Celine Choubaooo</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+/* Basic & Body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, #1b0a36, #0d0616);
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Stars background */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0.8;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%,100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+/* Container */
+.container {
+    text-align: center;
+    max-width: 600px;
+    padding: 50px;
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.05);
+    border-radius: 25px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    animation: fadeIn 2s ease;
+}
+
+/* Typography */
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-weight: 300;
+    color: #ffb3d9;
+    margin-top: 0;
+}
+
+p {
+    margin: 30px 0;
+    line-height: 1.8;
+    font-size: 18px;
+    color: #f5e6ff;
+}
+
+#countdown {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #ffd6f6;
+}
+
+/* Buttons */
+button {
+    padding: 14px 35px;
+    border-radius: 40px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#yesBtn {
+    background: linear-gradient(45deg, #ff4da6, #ff1a75);
+    color: white;
+    box-shadow: 0 10px 30px rgba(255,0,128,0.4);
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #ccc;
+    margin-left: 15px;
+}
+
+#response {
+    margin-top: 30px;
+    font-size: 20px;
+    color: #ffb3d9;
+    font-weight: 500;
+}
+
+.signature {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #ffc0dd;
+    font-style: italic;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hearts animation */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp 5s linear forwards;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity:1; }
+    to { transform: translateY(-100vh); opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>CELINE CHOUBAOOOO</h1>
+    <h2>Will you be my Valentine?</h2>
+
+    <p>
+        I couldn’t wait to ask in person…  
+        I already know I want this Valentine’s to be ours.  
+        Not just the day — the memory. 🤍
+    </p>
+
+    <div id="countdown"></div>
+
+    <button id="yesBtn" onclick="sayYes()">Yes 🤍</button>
+    <button id="noBtn" onmouseover="removeNo()">No</button>
+
+    <div id="response"></div>
+    <div class="signature">— From your fatty 💖</div>
+</div>
+
+<!-- Background music (optional, muted until yes) -->
+<audio id="bgMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Auto Valentine countdown (next Feb 14)
+function getNextValentine() {
+    const now = new Date();
+    let year = now.getFullYear();
+    let val = new Date(year, 1, 14);
+    if (now > val) val = new Date(year + 1, 1, 14);
+    return val;
+}
+
+const targetDate = getNextValentine().getTime();
+
+setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+}, 1000);
+
+// Yes Button
+function sayYes() {
+    document.getElementById("response").innerHTML =
+        "I can’t wait for our Valentine’s, CELINE CHOUBAOOOO. I’ll make it magical. 🤍";
+
+    // Play music
+    let music = document.getElementById("bgMusic");
+    music.muted = false;
+    music.play().catch(() => {});
+
+    // Hearts animation
+    for (let i = 0; i < 50; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "🤍";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "0px";
+        heart.style.fontSize = (10 + Math.random()*20) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+    }
+}
+
+// No button disappears
+function removeNo() {
+    document.getElementById("noBtn").style.display = "none";
+}
+
+// Generate stars
+for (let i = 0; i < 120; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.animationDuration = (Math.random()*3+2) + "s";
+    document.body.appendChild(star);
+}
+</script>
+
+</body>
+</html>
